@@ -1,0 +1,24 @@
+class cla1:
+    def __init__(self):
+        self.lt1 = []
+
+    def sel_depart(self, arg1: str):
+        with pc.session() as session:
+            res = session.query(Depart).filter(Depart.supe == arg1).all()
+            var1 = len(res)
+            print(var1)
+            self.lt1.append((arg1, var1))
+            for a in res:
+                print(a.name)
+                self.sel_depart(a.name)
+
+
+def sel_depart(sr):
+    with pc.session() as session:
+        res = session.query(Depart).filter(Depart.supe == sr).all()
+        for a in res:
+            print(a.name)
+            sel_depart(a.name)
+
+
+sel_depart("正和")
